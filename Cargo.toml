@@ -1,9 +1,11 @@
 [package]
-name = "dotnet-remoting-bin"
+name = "bad-north-save-game-editor"
 version = "0.1.0"
+license = "MIT"
 authors = ["Benedikt Werner <1benediktwerner@gmail.com>"]
+repository = "https://github.com/benediktwerner/bad-north-save-game-editor"
+description = "Editor for save games from the game Bad North"
 edition = "2018"
-
 
 [dependencies]
 clap = "2"

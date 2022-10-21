@@ -41,20 +41,19 @@ fn main() {
     upgrades_to_add.insert("Hero_Upgrade_PhilosophersStone");
     upgrades_to_add.insert("Hero_Upgrade_Cornucopia");
 
-    upgrades_to_add.insert("Hero_Trait_Sturdy");        // Sure-Footed
-    upgrades_to_add.insert("Hero_Trait_Fast");          // Fleet of Foot
+    upgrades_to_add.insert("Hero_Trait_Sturdy"); // Sure-Footed
+    upgrades_to_add.insert("Hero_Trait_Fast"); // Fleet of Foot
     upgrades_to_add.insert("Hero_Trait_CheaperSkills"); // Skillful
-    upgrades_to_add.insert("Hero_Trait_SharpWeapons");  // Sharp Weapons
+    upgrades_to_add.insert("Hero_Trait_SharpWeapons"); // Sharp Weapons
     upgrades_to_add.insert("Hero_Trait_FastReplenish"); // Rousing Speeches
-    upgrades_to_add.insert("Hero_Trait_CheaperItems");  // Collector
-    upgrades_to_add.insert("Hero_Trait_ExtraArmor");    // Ironskin
+    upgrades_to_add.insert("Hero_Trait_CheaperItems"); // Collector
+    upgrades_to_add.insert("Hero_Trait_ExtraArmor"); // Ironskin
     upgrades_to_add.insert("Hero_Trait_ShortCooldown"); // Energetic
-    upgrades_to_add.insert("Hero_Trait_BluntWeapons");  // Heavy Weapons ?
-    upgrades_to_add.insert("Hero_Trait_ExtraUnit");     // Popular
-    upgrades_to_add.insert("Hero_Trait_ExtraUses");     // Heavy Load
-    upgrades_to_add.insert("Hero_Trait_Giant");         // Mountain
-                                                        // Fearless
-
+    upgrades_to_add.insert("Hero_Trait_BluntWeapons"); // Heavy Weapons ?
+    upgrades_to_add.insert("Hero_Trait_ExtraUnit"); // Popular
+    upgrades_to_add.insert("Hero_Trait_ExtraUses"); // Heavy Load
+    upgrades_to_add.insert("Hero_Trait_Giant"); // Mountain
+                                                // Fearless
 
     let mut upgrade_entries_to_update = Vec::new();
     let mut upgrade_inners_to_update = Vec::new();
@@ -160,13 +159,13 @@ fn main() {
 }
 
 fn can_be_starting(s: &str) -> bool {
-    match s {
+    !matches!(
+        s,
         "Hero_Class_Infantry"
-        | "Hero_Class_Pikemen"
-        | "Hero_Class_Archers"
-        | "Hero_Upgrade_PikeCharge"
-        | "Hero_Upgrade_Plunge_Attack"
-        | "Hero_Upgrade_ArcheryFocus" => false,
-        _ => true,
-    }
+            | "Hero_Class_Pikemen"
+            | "Hero_Class_Archers"
+            | "Hero_Upgrade_PikeCharge"
+            | "Hero_Upgrade_Plunge_Attack"
+            | "Hero_Upgrade_ArcheryFocus"
+    )
 }

@@ -44,7 +44,7 @@ pub enum Record {
 }
 
 impl Record {
-    pub fn as_class(&self) -> &Class {
+    pub const fn as_class(&self) -> &Class {
         if let Self::Class(class) = self {
             class
         } else {
@@ -121,7 +121,7 @@ pub enum Member {
 }
 
 impl Member {
-    pub fn as_reference(&self) -> &i32 {
+    pub const fn as_reference(&self) -> &i32 {
         if let Self::Reference(id) = self {
             id
         } else {
@@ -129,7 +129,7 @@ impl Member {
         }
     }
 
-    pub fn as_i32(&self) -> i32 {
+    pub const fn as_i32(&self) -> i32 {
         if let Self::Primitive(Primitive::Int32(val)) = self {
             *val
         } else {
@@ -181,7 +181,7 @@ pub enum Primitive {
 }
 
 impl Primitive {
-    pub fn primitive_type(&self) -> PrimitiveType {
+    pub const fn primitive_type(&self) -> PrimitiveType {
         match self {
             Primitive::Boolean(..) => PrimitiveType::Boolean,
             Primitive::Byte(..) => PrimitiveType::Byte,

@@ -178,7 +178,7 @@ impl Serializer {
                 Member::Primitive(val) => {
                     self.write_u8(8);
                     self.write_primitive_type(&val.primitive_type());
-                    self.write_primitive(val)
+                    self.write_primitive(val);
                 }
                 Member::Reference(id) => {
                     self.write_u8(9);
@@ -225,7 +225,7 @@ impl Serializer {
         match val {
             Primitive::Boolean(val) => self.write_u8(*val as u8),
             Primitive::Byte(val) => self.write_u8(*val),
-            Primitive::Char(val) => todo!(),
+            Primitive::Char(_val) => todo!(),
             Primitive::Decimal(val) => self.write_string(val),
             Primitive::Double(val) => self.output.write_f64::<LittleEndian>(*val).unwrap(),
             Primitive::Int16(val) => self.output.write_i16::<LittleEndian>(*val).unwrap(),
@@ -245,17 +245,15 @@ impl Serializer {
 
     fn write_string(&mut self, val: &str) {
         let mut length = val.len();
-        assert!(length <= 2_147_483_647);
+        assert!(length <= 0x7FFF_FFFF);
         loop {
-            let mut val = (length & 0b111_1111) as u8;
+            let val = (length & 0b111_1111) as u8;
             length >>= 7;
-            if length != 0 {
-                val += 0b1000_0000;
-                self.write_u8(val);
-            } else {
+            if length == 0 {
                 self.write_u8(val);
                 break;
             }
+            self.write_u8(val | 0b1000_0000);
         }
         self.output.extend(val.as_bytes());
     }
